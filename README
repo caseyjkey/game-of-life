@@ -1,0 +1,6 @@
+The Game of Life, which is also known as, “Life”, is a, “cellular automaton”, and was made by the mathematician John Horton Conway in 1970.  A cellular automaton, is a model studied in many subjects, and consists of a regular grid of cells, each cell has a finite number of states, for example, it could have the state of, “On”, and the state of, “Off.” The grid can also have any finite number of dimensions. For every cell, there is a set of cells around it called its, “neighborhood”, this usually includes the cell itself, this neigh
+is defined as a certain area relative to the specified cell. A example, a cellular automaton has the rules that say that a neighborhood of a cell might be defined as a set of cells within a distance of 3 cells.
+
+This is made to increase my understanding of the C++ language, which I am still a novice of. This is also my Science Fair project for this year. Wish me luck!
+
+Running: Copy or download source, open in a IDE, and compile.
