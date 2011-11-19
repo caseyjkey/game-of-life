@@ -1,6 +1,7 @@
 // Draft of the game of life
 #include <iostream>
 #include <stdio.h>
+#include <string.h>
 using namespace std;
 char world[10] [10];
 char world2[10] [10];
@@ -12,6 +13,7 @@ int neighbors; //Used in the function birth to count how many neighbors a cell h
 char var2[4]; //Variable used to enter another seed, only will be used once.
 int inc = 0;
 int inc2 = 0;
+char advanceGen[4];
 void clearScreen(){
 cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 }
@@ -115,7 +117,39 @@ void calculate(){
          }
      }
 }
+void calculate2(){
+    unsigned int neighbors;
+     for (int m = 0; m < 11; m++)
+     {
+         for (int n = 0; n < 11; n++)
+         {
+             neighbors = 0;
+             //Begin counting number of neighbors:
+             if(world2[m-1][n-1] == '+')neighbors++;
+             if(world2[m-1][n] == '+') neighbors++;
+             if(world2[m-1][n+1] == '+') neighbors++;
+             if (world2[m][n-1] == '+') neighbors++;
+             if (world2[m][n+1] == '+') neighbors++;
+             if (world2[m+1][n-1] == '+') neighbors++;
+             if (world2[m+1][n] == '+') neighbors++;
+             if (world2[m+1][n+1] == '+') neighbors++;
 
+             //Apply rules to the cell:
+             if (world2[m][n] == '+' && neighbors < 2)
+                world[m][n] = '-';
+             else if (world2[m][n] == '+' && neighbors > 3)
+                world[m][n] = '-';
+             else if (world2[m][n] == '+' && (neighbors == 2 || neighbors == 3))
+                world[m][n] = '+';
+             else if (world2[m][n] == '-' && neighbors == 3)
+                world[m][n] = '+';
+             else if (world2[m][n] == '-' && (neighbors <= 2 || neighbors >= 4))
+                world[m][n] = '-';
+
+
+         }
+     }
+}
 int main(){
 cells(); //Assigning values to world[] []
 cout << "\t\t\tHello to Conway's Game of Life!";
@@ -138,6 +172,31 @@ swap();
 calculate();
 cout << "\n\nOutput\n";
 gameboard2();
+clearScreen();
+cout << "Would you like to advance a generation? Yes or No: ";
+cin >> advanceGen;
+while(strcmp(advanceGen, "No") != 0){
+    int y;
+    y++;
+    if(y %2 == 0){
+        calculate();
+        cout << "\n\nGeneration: " << y << endl;
+        gameboard2();
+        cin.sync();
+        cin.get();
+        cout << "Would you like to advance a generation? Yes or No: ";
+        cin >> advanceGen;
+    }
+    else{
+        calculate2();
+        cout << "\n\nGeneration: " << y << endl;
+        gameboard();
+        cin.sync();
+        cin.get();
+        cout << "Would you like to advance a generation? Yes or No: ";
+        cin >> advanceGen;
+    }
+}
 cin.sync();
 cin.get();
 return 0;
