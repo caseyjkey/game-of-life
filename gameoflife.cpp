@@ -16,7 +16,7 @@ void clearScreen(){
 cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 }
 //Creating function that will print the gameboard onto the screen.
-void gameboard(){ // Making the gameboard. Helped to learn about line continuation :P
+void gameboard(){ // Making the gameboard. Helped to learn about line continuation :P but ended up just using nested for loops.
     int x, q;
     cout << "\n__| 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10";
     for (int x = 1; x < 11; x++) {
@@ -31,14 +31,8 @@ void cells(){
     for(int b=0; b != 11; b++){
         for(inc = 0;inc != 11; inc++){
             world[inc] [b] = '-';
+            world2[inc][b] = '-';
     }
-    }
-}
-void swap(){
-    for(int g=0; g != 11; g++){
-        for(inc2 = 0; inc2 != 11; inc++){
-            world2[inc2][g] = world[inc2][g];
-        }
     }
 }
 //Creating function that allows the user to create seed cells.
@@ -79,10 +73,18 @@ void calculate(){
          {
              neighbors = 0;
              //Begin counting number of neighbors:
-             if (world[m-1][n-1] == '+') neighbors++;
-             if (world[m-1][n] == '+') neighbors++;
-             if (world[m-1][n+1] == '+') neighbors++;
-             if (world[m][n-1] == '+') neighbors++;
+             if(world[m-1][n-1] == '+'){
+                neighbors++;
+             }
+             if(world[m-1][n] == '+'){
+                neighbors++;
+             }
+             if(world[m-1][n+1] == '+'){
+                neighbors++;
+             }
+             if (world[m][n-1] == '+'){
+                neighbors++;
+             }
              if (world[m][n+1] == '+') neighbors++;
              if (world[m+1][n-1] == '+') neighbors++;
              if (world[m+1][n] == '+') neighbors++;
@@ -123,7 +125,6 @@ gameboard(); //Prints gameboard to screen
 seeds();//Allows user to be prompted for seed coordinates
 cout << "\n\nInput (Seed Cells)\n";
 gameboard();
-swap();
 calculate();
 cout << "\n\nOutput\n";
 gameboard();
